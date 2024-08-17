@@ -11,7 +11,7 @@ export type Pokemon = {
   sprites: PokemonSprite;
 };
 
-type PokemonType = {
+export type PokemonType = {
   slot: number;
   type: {
     name: string;

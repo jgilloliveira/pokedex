@@ -20,7 +20,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Stack direction={"row"} spacing={2}>
+    <Stack direction={"row"} flexWrap={"wrap"} justifyContent={"center"}>
       {pokemons?.map((pokemon) => (
         <PokemonCard key={pokemon?.name} pokemon={pokemon} />
       ))}
