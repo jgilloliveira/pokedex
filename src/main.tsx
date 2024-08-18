@@ -7,6 +7,7 @@ import PokemonDetails from "./pages/PokemonDetails.tsx";
 import { ROUTES } from "./utils/constants.ts";
 import { Provider } from "react-redux";
 import { store } from "./storage/pokemon-storage.ts";
+import NotFound from "./pages/NotFound.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById("root")!).render(
           {/* <Route path={"/pokemon/:id"} element={<PokemonDetails />} /> */}
           <Route path={"/pokemon/:id"} element={<PokemonDetails />} />
           <Route path={ROUTES.HOME} element={<App />} />
+          <Route path={"*"} element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </Provider>

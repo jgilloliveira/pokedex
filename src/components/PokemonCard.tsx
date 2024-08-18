@@ -12,7 +12,7 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
   const navigate = useNavigate();
   return (
     <Card
-      sx={{ minWidth: "245px", m: 2 }}
+      sx={{ minWidth: "245px", m: 2, cursor: "pointer" }}
       onClick={() => {
         navigate(`/pokemon/${pokemon?.id}`);
       }}

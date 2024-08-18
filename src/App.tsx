@@ -1,14 +1,15 @@
 import "./App.css";
-import Header from "./components/layouts/Header";
+import MainLayout from "./components/layouts/MainLayout";
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <>
-      <Header onSearch={console.log} />
+    <MainLayout>
       <Home />
       {/* <PokemonDetails /> */}
-    </>
+      {/* <NotFound /> */}
+    </MainLayout>
   );
 }
 

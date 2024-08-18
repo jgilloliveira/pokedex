@@ -9,15 +9,24 @@ import {
   selectTotalPages,
 } from "../storage/pokemon-storage";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
   const pokemons = useSelector((state: RootState) => selectPokemons(state));
   const totalPages = useSelector((state: RootState) => selectTotalPages(state));
-  const [page, setPage] = useState<number>(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState<number>(
+    parseInt(searchParams.get("page") || "1")
+  );
   const dispatch = useDispatch<PokemonDispatch>();
 
   useEffect(() => {
+    console.log("searchParams", searchParams);
+  }, [searchParams]);
+
+  useEffect(() => {
     dispatch(fetchPokemons(page));
+    setSearchParams({ page });
   }, [dispatch, page]);
 
   return (
@@ -32,6 +41,7 @@ const Home = () => {
           size="large"
           page={page}
           count={totalPages}
+          // onChange={(e, value) => setPage(value)}
           onChange={(e, value) => setPage(value)}
         />
       </Box>
