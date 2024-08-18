@@ -1,29 +1,33 @@
-import { useEffect, useState } from "react";
-import { getPokemons } from "../api/pokeapi";
-import { Pokemon } from "../models/pokemon-model";
+import { useEffect } from "react";
 import PokemonCard from "../components/PokemonCard";
-import { Stack } from "@mui/material";
+import { Box, Pagination, Stack } from "@mui/material";
+import {
+  fetchPokemons,
+  PokemonDispatch,
+  RootState,
+  selectPokemons,
+} from "../storage/pokemon-storage";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
-  const [pokemons, setPokemons] = useState<Pokemon[]>();
+  const pokemons = useSelector((state: RootState) => selectPokemons(state));
 
-  const listPokemons = async () => {
-    try {
-      setPokemons(await getPokemons());
-    } catch {
-      alert("Ocurrió un error al tratar de obstener los ids.");
-    }
-  };
+  const dispatch = useDispatch<PokemonDispatch>();
 
   useEffect(() => {
-    listPokemons();
-  }, []);
+    dispatch(fetchPokemons());
+  }, [dispatch]);
 
   return (
-    <Stack direction={"row"} flexWrap={"wrap"} justifyContent={"center"}>
-      {pokemons?.map((pokemon) => (
-        <PokemonCard key={pokemon?.name} pokemon={pokemon} />
-      ))}
+    <Stack alignItems={"center"}>
+      <Stack direction={"row"} flexWrap={"wrap"} justifyContent={"center"}>
+        {pokemons?.map((pokemon) => (
+          <PokemonCard key={pokemon?.name} pokemon={pokemon} />
+        ))}
+      </Stack>
+      <Box m={10} p={1} bgcolor={"white"} borderRadius={"100px"}>
+        <Pagination size="large" count={10} />
+      </Box>
     </Stack>
   );
 };

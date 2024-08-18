@@ -1,3 +1,8 @@
+export const ROUTES = {
+  HOME: "/",
+  POKEMON_DETAILS: (id: number | string) => `/pokemon/${id}`,
+};
+
 export const TYPES_COLORS: { [key: string]: string } = {
   steel: "#5fa0b7",
   water: "#2279e1",
