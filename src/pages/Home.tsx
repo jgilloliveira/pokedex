@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PokemonCard from "../components/PokemonCard";
 import { Box, Pagination, Stack } from "@mui/material";
 import {
@@ -6,17 +6,19 @@ import {
   PokemonDispatch,
   RootState,
   selectPokemons,
+  selectTotalPages,
 } from "../storage/pokemon-storage";
 import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
   const pokemons = useSelector((state: RootState) => selectPokemons(state));
-
+  const totalPages = useSelector((state: RootState) => selectTotalPages(state));
+  const [page, setPage] = useState<number>(1);
   const dispatch = useDispatch<PokemonDispatch>();
 
   useEffect(() => {
-    dispatch(fetchPokemons());
-  }, [dispatch]);
+    dispatch(fetchPokemons(page));
+  }, [dispatch, page]);
 
   return (
     <Stack alignItems={"center"}>
@@ -26,7 +28,12 @@ const Home = () => {
         ))}
       </Stack>
       <Box m={10} p={1} bgcolor={"white"} borderRadius={"100px"}>
-        <Pagination size="large" count={10} />
+        <Pagination
+          size="large"
+          page={page}
+          count={totalPages}
+          onChange={(e, value) => setPage(value)}
+        />
       </Box>
     </Stack>
   );

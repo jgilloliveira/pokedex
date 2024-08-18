@@ -1,3 +1,5 @@
+export const PAGE_LIMIT = 20;
+
 export const ROUTES = {
   HOME: "/",
   POKEMON_DETAILS: (id: number | string) => `/pokemon/${id}`,

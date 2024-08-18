@@ -8,7 +8,7 @@ const PokemonStats = ({ stats }: PokemonStatsProps) => {
   return (
     <Stack spacing={1} alignItems={"flex-start"}>
       {stats.map((stat) => (
-        <Stack direction={"row"}>
+        <Stack key={stat.stat.name} direction={"row"}>
           <Typography fontWeight={"bold"}>
             {`${stat.stat.name.toUpperCase()}: `}
           </Typography>

@@ -4,26 +4,30 @@ import {
   PayloadAction,
   createAsyncThunk,
 } from "@reduxjs/toolkit";
-import { Pokemon } from "../models/pokemon-model";
+import { ListResponse, Pokemon } from "../models/pokemon-model";
 import { getPokemons } from "../api/pokeapi";
+import { PAGE_LIMIT } from "../utils/constants";
 
 export type PokemonState = {
   list: Pokemon[];
+  totalPages: number;
   isFetching: boolean;
 };
 
-export const fetchPokemons = createAsyncThunk("pokemon/list", () =>
-  getPokemons()
+export const fetchPokemons = createAsyncThunk("pokemon/list", (page?: number) =>
+  getPokemons(page)
 );
+
+const initialState: PokemonState = {
+  list: [],
+  isFetching: false,
+  totalPages: 0,
+};
 
 const pokemonSlice = createSlice({
   name: "pokemon",
-  initialState: { list: [], isFetching: false } as PokemonState,
-  reducers: {
-    // setPokemonList: (state, action: PayloadAction<Pokemon[]>) => {
-    //   state.list = action.payload;
-    // },
-  },
+  initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchPokemons.pending, (state) => {
@@ -31,24 +35,15 @@ const pokemonSlice = createSlice({
       })
       .addCase(
         fetchPokemons.fulfilled,
-        (state, action: PayloadAction<Pokemon[]>) => {
+        (state, action: PayloadAction<ListResponse<Pokemon>>) => {
           state.isFetching = false;
-          state.list = action.payload;
+          state.list = action.payload.results;
+          state.totalPages = Math.ceil(action.payload.count / PAGE_LIMIT);
         }
       )
       .addCase(fetchPokemons.rejected, (state) => {
         state.isFetching = false;
       });
-    // .addCase(fetchPokemonById.pending, (state) => {
-    //   state.isFetching = true;
-    // })
-    // .addCase(fetchPokemonById.fulfilled, (state, action: PayloadAction<string>) => {
-    //   state.isFetching = false;
-    //   state.selectedItem = action.payload;
-    // })
-    // .addCase(fetchPokemonById.rejected, (state) => {
-    //   state.isFetching = false;
-    // });
   },
 });
 
@@ -61,6 +56,7 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 export type PokemonDispatch = typeof store.dispatch;
 export const selectPokemons = (state: RootState) => state.pokemon.list;
+export const selectTotalPages = (state: RootState) => state.pokemon.totalPages;
 export const selectStatus = (state: RootState) => state.pokemon.isFetching;
 
 // export const { setPokemonList } = pokemonSlice.actions;

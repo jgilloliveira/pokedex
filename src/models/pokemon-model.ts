@@ -1,8 +1,8 @@
-export type PokemonListResponse = {
+export type ListResponse<T> = {
   count: number;
   next?: string;
   previous?: string;
-  results: { name: string }[];
+  results: T[];
 };
 
 export type Pokemon = {

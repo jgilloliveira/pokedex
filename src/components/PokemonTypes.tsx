@@ -11,6 +11,7 @@ const PokemonTypes = ({ types }: PokemonTypeProps) => {
     <Stack direction={"row"} spacing={1} justifyContent={"center"}>
       {types.map(({ type }) => (
         <Chip
+          key={type.name}
           label={type.name.toUpperCase()}
           sx={{
             fontWeight: "bold",
