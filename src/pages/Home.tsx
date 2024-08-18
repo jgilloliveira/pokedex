@@ -26,7 +26,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchPokemons(page));
-    setSearchParams({ page });
+    setSearchParams({ page: page.toString() });
   }, [dispatch, page]);
 
   return (
@@ -42,7 +42,7 @@ const Home = () => {
           page={page}
           count={totalPages}
           // onChange={(e, value) => setPage(value)}
-          onChange={(e, value) => setPage(value)}
+          onChange={(_, value) => setPage(value)}
         />
       </Box>
     </Stack>

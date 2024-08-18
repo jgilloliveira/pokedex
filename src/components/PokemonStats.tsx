@@ -6,13 +6,29 @@ type PokemonStatsProps = {
 
 const PokemonStats = ({ stats }: PokemonStatsProps) => {
   return (
-    <Stack spacing={1} alignItems={"flex-start"}>
+    <Stack direction={"row"} sx={{ borderRadius: 5 }} flexWrap={"wrap"}>
       {stats.map((stat) => (
-        <Stack key={stat.stat.name} direction={"row"}>
-          <Typography fontWeight={"bold"}>
-            {`${stat.stat.name.toUpperCase()}: `}
+        <Stack
+          key={stat.stat.name}
+          justifyContent={"space-between"}
+          sx={{
+            width: 100,
+          }}
+        >
+          <Stack height={"100%"} justifyContent={"flex-end"}>
+            <Typography
+              textAlign={"left"}
+              fontSize={12}
+              color={"#888"}
+              fontWeight={"bold"}
+            >
+              {stat.stat.name.toUpperCase()}
+            </Typography>
+          </Stack>
+
+          <Typography textAlign={"left"} fontSize={28}>
+            {stat.base_stat}
           </Typography>
-          <Typography>{stat.base_stat}</Typography>
         </Stack>
       ))}
     </Stack>
