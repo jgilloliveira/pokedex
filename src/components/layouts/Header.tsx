@@ -33,7 +33,11 @@ const Header = () => {
               </IconButton>
             </InputAdornment>
           ),
-          sx: { borderRadius: "30px", bgcolor: "white", width: 524 },
+          sx: {
+            borderRadius: "30px",
+            bgcolor: "white",
+            width: "min(524px, calc(100vw - 120px))",
+          },
         }}
         onChange={({ target }) => setPokemon(target.value.toLowerCase())}
         onKeyDown={(e) => {
