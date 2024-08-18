@@ -58,7 +58,3 @@ export type PokemonDispatch = typeof store.dispatch;
 export const selectPokemons = (state: RootState) => state.pokemon.list;
 export const selectTotalPages = (state: RootState) => state.pokemon.totalPages;
 export const selectStatus = (state: RootState) => state.pokemon.isFetching;
-
-// export const { setPokemonList } = pokemonSlice.actions;
-
-// export type AppDispatch = typeof store.dispatch;

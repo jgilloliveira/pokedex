@@ -22,7 +22,6 @@ type PokemonDetailsParams = {
 const PokemonDetails = () => {
   const { id: pokemonId } = useParams<PokemonDetailsParams>(); // to call API
   const pokemonList = useSelector((state: RootState) => state.pokemon.list);
-  // const dispatch = useDispatch();
 
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
 
@@ -35,7 +34,6 @@ const PokemonDetails = () => {
         setPokemon(storePokemon || (await getPokemonDetails(pokemonId)));
       }
     } catch {
-      // alert("Ocurrió un error al tratar de obstener los ids.");
       setPokemon(null);
     }
   };

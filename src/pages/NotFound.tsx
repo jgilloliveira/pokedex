@@ -6,7 +6,6 @@ import { ROUTES } from "../utils/constants";
 const NotFound = () => {
   const navigate = useNavigate();
   return (
-    // <Stack spacing={2}>
     <Stack spacing={3} alignItems={"center"}>
       <Stack>
         <Typography fontSize={40} fontWeight={"bold"}>

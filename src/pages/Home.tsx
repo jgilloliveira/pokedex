@@ -41,7 +41,6 @@ const Home = () => {
           size="large"
           page={page}
           count={totalPages}
-          // onChange={(e, value) => setPage(value)}
           onChange={(_, value) => setPage(value)}
         />
       </Box>

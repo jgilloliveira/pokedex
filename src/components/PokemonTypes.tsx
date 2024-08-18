@@ -18,7 +18,6 @@ const PokemonTypes = ({ types }: PokemonTypeProps) => {
             color: "white",
             backgroundColor: TYPES_COLORS[type.name],
           }}
-          // color={TYPES_COLORS[type.name]}
         />
       ))}
     </Stack>
